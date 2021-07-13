@@ -1,0 +1,110 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Group actions}
+
+\begin{definition}[Group actions]
+For \(G\) group and \(X\) set, an {\em action} of \(G\) (or \(G\)-{\em action}) on \(X\) is a homomorphism \(\phi : G \to \cals X\). We write \(\phi_g\) instead of \(\phi(g)\).
+\end{definition}
+
+The fact \(\phi\) is a homomorphism can be stated explicitly: \(\phi_{gh} = \phi_g \phi_h\) for every \(g, h \in G\). In particular, by Proposition~\ref{prop:HomProps}, \(\phi_1\) is the identity function, \(\phi_{\inv g} = \inv\phi_g\) for every \(g \in G\). 
+
+\begin{definition}[Orbits and stabilizers]
+For \(G\) group, consider a set \(X\) with a \(G\)-action \(\phi\). For \(x \in X\), the {\em stabilizer} of \(x\) is the set
+\[\stab_\phi x \coloneq \set{g \in G \mid \phi_g(x) = x}\]
+whereas the {\em orbit} of \(x\) is
+\[\orb_\phi x \coloneq \set{y \in X \mid \phi_g(x) = y \text{ for some } g \in G}.\]
+\end{definition}
+
+\begin{proposition}
+Let \(G\) be group, \(X\) be set and \(\phi\) be a \(G\)-action on \(X\). The stabilizers of the elements of \(X\) are subgroups of \(G\).
+\end{proposition}
+
+\begin{proof}
+For \(a, b \in \stab_\phi x\) we have
+\[\phi_{a \inv b}(x) = \phi_a (\phi_{\inv b} (x)) = \phi_a (\inv \phi_b(x)) = \phi_a (x) = x ,\]
+that is \(a \inv b \in \stab_\phi (x)\).
+\end{proof}
+
+\begin{proposition}
+For \(G\) group, \(X\) set with a \(G\)-action \(\phi\) on it, we have
+\[\ker \phi = \bigcap_{x \in X} \stab_\phi x .\]
+\end{proposition}
+
+\begin{proof}
+\(\ker \phi = \set{g \in G \mid \phi_g = \id_X} = \set{g \in G \mid \phi_g(x) = x \text{ for every } x \in X}\).
+\end{proof}
+
+\begin{proposition}
+Let \(G\) be group, \(X\) be set and \(\phi\) be a \(G\)-action on \(X\). The orbits of the elements of \(X\) are equivalence classes (corresponding to a suitable equivalence relation).
+\end{proposition}
+
+\begin{proof}
+The relation we are interested in is the one of {\em conjugacy}: we say \(x \in X\) is {\em conjugated} to \(y \in X\) whenever \(\phi_g (x) = y\) for some \(g \in G\). Quick calculations suffice to verify this.
+\end{proof}
+
+\begin{proposition}
+For \(G\) group, \(X\) set, \(\phi\) action of \(G\) on \(X\), we have
+\[\stab_\phi(\phi_g (x)) = g (\stab_\phi x) \inv g .\]
+for every \(g \in G\) and \(x \in X\). 
+\end{proposition}
+
+\begin{proof}
+In fact, for every \(a \in G\)
+\begin{align*}
+a \in \stab_\phi (\phi_g (x)) & \lrarr \phi_g (x) = \phi_a (\phi_g (x)) = \phi_{ag} (x) \lrarr \\
+& \lrarr x = \phi_{\inv g a g} (x) \lrarr \inv g a g \in \stab_\phi x . \qedhere
+\end{align*}
+\end{proof}
+
+\begin{proposition}\label{prop:OrbsStabsCosets}
+Consider a group \(G\), a set \(X\) and \(\phi\) a \(G\)-action on \(X\). Then for every \(x \in X\) there exists a bijection form \(G/\call_{\stab_\phi x}\) to \(\orb_\phi x\). In particular, if \(G\) is a finite group, then \(\abs{\stab_\phi x} \abs{\orb_\phi x} = \abs G\).
+\end{proposition}
+
+\begin{proof}
+Consider the function
+\[f : G/\call_{\stab_\phi x} \to \orb_\phi x \,, \ g \stab_\phi x \to \phi_g (x) ,\]
+which we show is bijective. It is obvious that \(f\) is surjective; only injectivity remains to be proved. Take \(a, b \in G\) with \(\phi_a (x) = \phi_b (x)\): in this case \(x = \phi_{\inv b} (\phi_a (x)) = \phi_{\inv b a} (x)\); so \(\inv b a \in \stab_\phi (x)\), that is \(a \stab_\phi x = b \stab_\phi x\).
+\end{proof}
+
+We have actions of a group on itself too. For \(G\) group, there is an important \(G\)-action on \(G\):
+\[\text{inn} : G \to \cals G ,\]
+where the function \(\text{inn}_g : G \to G\) is defined by \(\text{inn}_g(x) = g x\inv g\).\footnote{Actually, \(\text{inn}_g\) is an automorphism of \(G\), but here we only care it is a bijection.} It is useful to give some new notation in this case:
+\begin{align*}
+& C_G(x) \coloneq \stab_{\text{inn}} x = \set{g \in G \mid g x \inv g = x} = \set{g \in G \mid gx = xg} \\
+& [x]_G \coloneq \orb_{\text{inn}} x = \set{y \in G \mid y = g x \inv g \text{ for some } g \in G} .
+\end{align*}
+In this case we have an important property.
+
+\begin{proposition}[Class Formula]\label{prop:ClassFormula}
+For \(G\) finite group, let \(\set{[x]_G \mid x \in F}\) be a partition of \(G\), for some \(F \subseteq G\). Then \(\calz G \subseteq F\) and \(\set{\calz G} \cup \set{[x]_G \mid x \in F \setminus \calz G}\) is a partition of \(G\). In particular, if \(G\) is finite, we have
+\begin{equation}\abs G = \abs{\mathcal Z G} + \sum_{x \in F \setminus \mathcal Z G} [G:C_G(x)] .\label{eqn:ClassForm}\end{equation}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item If \(x \in \calz G\), then there exists \(a \in F\) such that \(x \in \orb_\lambda a\), that is \(x = g a \inv g\) for some \(g \in G\). Thus \(a = \inv g x g = x\) and \(x \in F\) as well.
+\item Follows from what we have just shown. In order to prove the identity~\eqref{eqn:ClassForm} also Proposition~\ref{prop:OrbsStabsCosets} is needed.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+Let \(G\) be a group with \(p^n\) elements, where \(p\) is a prime number. Then \(p\) divides \(\abs{\calz G}\).
+\end{corollary}
+
+\begin{proof}
+Consider \(R \subseteq G\) such that \(\set{[x]_G \mid x \in R}\) is a partition of \(G\). Obviously, \(p\) cannot divide the cardinality of any \([x]_G\) with \(x \in \calz G\), because they are singletons. If \(p\) does not divide \(\abs{[x]_G} = \abs G / \abs{C_G(x)}\) for some \(x \in R \setminus \calz G\), then \(\abs{C_G (x)} = \abs G\) and so \(C_G(x) = G\). But in this case, \(g x \inv g = x\), viz \(gx = xg\), for every \(g \in G\), and then \(x \in \calz G\). Absurd. \(p\) divides also non banal conjugacy classes. The conclusion we want follows immediately.
+\end{proof}
+
+\begin{corollary}
+For \(p\) prime number, any group with \(p^2\) elements is abelian.
+\end{corollary}
+
+\begin{proof}
+Let \(G\) be a group with \(\abs G = p^2\). By the previous corollary, \(\calz G\) must have \(p\) or \(p^2\) elements. If it has \(p\), then \(\abs{G / \calz G} = p\) and consequently \(G/\calz G\) is cyclic (Lemma~\ref{cor:GroupsWithPrimeCardAreCyclic}). This is equivalent to saying \(G = \calz G\), which cannot happen since the twos have a different number of elements. In conclusion, the unique alternative survives is \(\abs{\calz G} = p^2\); in particular \(\calz G = G\) since the groups are both finite.
+\end{proof}
+
+\begin{exercise}
+Now you are aware that, for \(p\) prime number, any group \(G\) of order \(p^2\) must be abelian, you can go deeper: show that \(G \cong \zz/p^2\zz\) if it is cyclic, \(G \cong \zz/p\zz \times \zz/p\zz\) otherwise. (Hint: if \(G\) is not cyclic, there exist \(x, y \in G\) such that \(\gen x \cap \gen y = \set{1}\).)
+\end{exercise}

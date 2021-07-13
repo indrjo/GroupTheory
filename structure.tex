@@ -1,0 +1,64 @@
+% !TEX program = lualatex
+% !TEX root = ./groups.tex
+
+\documentclass[ structure = article
+              , secstyle = center
+              , liststyle = aligned
+              , twocolcontents = all
+              , headerstyle = center
+              , headerfont = italic
+              ]{suftesi}
+
+\usepackage{silence}
+\WarningFilter[xcol]{xcolor}{Incompatible color definition}
+\ActivateWarningFilters[xcol]
+
+\usepackage[no-math]{fontspec}
+\setmainfont{Linux Libertine O}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=uk]{english}
+
+\usepackage[english=british]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{hyperref}
+\hypersetup{breaklinks,hidelinks}
+
+\usepackage{ libertinust1math
+           , MnSymbol
+           , mathtools
+           , extarrows
+           , amsthm
+           }
+\usepackage[ bb=ams
+           , cal=cm
+           , calscaled=.94
+           ]{mathalfa}
+
+\newcounter{mycounter}
+\counterwithin{mycounter}{section}
+\theoremstyle{definition}
+\newtheorem{definition}[mycounter]{Definition}
+\newtheorem{lemma}[mycounter]{Lemma}
+\newtheorem{proposition}[mycounter]{Proposition}
+\newtheorem{corollary}[mycounter]{Corollary}
+\newtheorem{note}[mycounter]{Note}
+\newtheorem{example}[mycounter]{Example}
+\newtheorem{exercise}[mycounter]{Exercise}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               }
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=4pt]}}
+          , shorten=-2pt
+          }
+
+\setcounter{section}{-1}

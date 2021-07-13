@@ -1,0 +1,53 @@
+% !TEX program = lualatex
+% !TEX root = ../groups.tex
+% !TEX spellcheck = en_GB
+
+\section{Permutations}
+
+Given a set \(X\), the set
+\[\cals X \coloneq \set{f : X \to X \mid f \text{ is bijective}}\]
+with the operation of composition is a group: in fact composition is associative, \(\id_X : X \to X\) defined by \(\id_X(x) = x\) is the identity and, since the elements of \(\cals X\) are bijective, the inverse of any \(f \in \cals X\) exists and it is \(\inv f\).
+
+\begin{definition}
+For \(X\) set, \(\cals X\) with the operation of composition is called {\em symmetric group} of \(X\) and its elements are the {\em permutations} of \(X\). There is a dedicated notation for the symmetric group of \(\set{1, \dots{}, n}\): it is \(\cals_n\).
+\end{definition}
+
+Considered a set \(X\) and a permutation \(\sigma : X \to X\), we define the relation \(\sim_\sigma\) on \(X\) as follows:
+\[a \sim_\sigma b \lrarr \sigma^i(a) = b \text{ for some } i \in \nn.\]
+It is immediate to show \(\sim_\sigma\) is an equivalence relation. The \(\sim_\sigma\)-equivalence class of \(x \in X\) is indicated with \([x]_\sigma\) and is called \(\sigma\)-{\em orbit} of \(x\). An orbit that is a singleton is said {\em banal}.
+
+The symmetric groups of finite sets have their own relevance.% Consider a finite set \(X\) and any \(\sigma \in \cals X\). Then \(\sigma\)-orbits
+%\[[x]_\sigma = \set{\sigma^j(x) \mid j \in \nn}\]
+%are finite as well: then there exists \(i, k \in \nn\) such that \(i > k\) and
+%\[\sigma^i(x) = \sigma^k(x) \lrarr \sigma^{i-k}(x) = x .\]
+%The set \(\set{n \in \nn^{\ge 1} \mid \sigma^n (x) = x} \subseteq \nn\) is not empty, thus it has a minimum.
+
+\begin{definition}
+Let \(X\) be a finite set. A {\em cycle} of \(X\) is a permutation \(\sigma\) of \(X\) such that there is at most one non-banal \(\sigma\)-orbit. The length of \(\sigma\) is the cardinality of the unique non-banal \(\sigma\)-orbit. A cycle of length \(2\) is said {\em transposition}.
+\end{definition}
+
+%A cycle \(\sigma \in \cals X\) is written as \(\begin{pmatrix} x_1 & x_2 & x_3 & \cdots{} & x_n \end{pmatrix}\) whenever \(\sigma (x_1) = x_2\), \(\sigma(x_2) = x_3\), \dots{} and \(\sigma(x_n) = x_1\).
+
+\begin{definition}
+For \(X\) finite set, two cycles \(\sigma_1, \sigma_2 \in \cals X\) are said {\em disjoint} whenever the non-banal \(\sigma_1\) and \(\sigma_2\)-orbits are disjoint.
+\end{definition}
+
+\begin{proposition}
+For \(X\) finite set, every \(\sigma \in \cals X \setminus \set{\id_X}\) is a composition of disjoint cycles. Such factorization is unique up to the order of composition of the cycles.
+\end{proposition}
+
+\begin{proof}
+\(X/\sim_\sigma\) is a finite partition of the set \(X\), because \(X\) itself is finite; in this case, let \(A_1, \dots{}, A_n\) be the non-banal \(\sigma\)-orbits. For \(k \in \set{1, \dots{}, n}\), the permutations
+\[\sigma_k : X \to X\,, \ \sigma_k(x) \coloneq \begin{cases} \sigma(x) & \text{if } x \in A_k \\ x & \text{otherwise} \end{cases}\]
+are cycles, because \(A_k\) is the unique non-banal \(\sigma_k\)-orbit. Now if \(x \in X\) has a banal \(\sigma\)-orbit, then \(x \notin A_k\) for every \(k \in \set{1, \dots{}, n}\) and
+\[(\sigma_1 \cdots{} \sigma_n) (x) = x = \sigma(x) .\] If instead \(x \in A_k\) for some \(k \in \set{1, \dots{}, n}\), then \(x \notin A_j\) for \(j \ne k\) and
+\begin{align*}
+(\sigma_1 \cdots{} \sigma_k \cdots{} \sigma_n)(x) & = (\sigma_1 \cdots{} \sigma_{k-1} \sigma_k) (x) = \\
+& = (\sigma_1 \cdots{} \sigma_{k-1})(\sigma_k(x)).
+\end{align*}
+But, since \(x \in A_k\), we have \(A_k = \set{x, \sigma(x), \sigma^2(x), \dots{}}\) and \(\sigma_k(x) = \sigma(x)\) by its definition: so \(\sigma_k(x) \in A_k\), as well. We continue
+\[(\sigma_1 \cdots{} \sigma_k \cdots{} \sigma_n)(x) = \sigma_k(x) = \sigma(x) .\]
+In any case, we have shown
+\[\sigma = \sigma_1 \cdots{} \sigma_n.\]
+We prove such decomposition is the unique one: for this purpose, suppose \(\sigma = \phi_1 \cdots{} \phi_m\) holds for some \(\phi_1, \dots{}, \phi_m\) cycles of \(X\). %Suppose \(x = \sigma(x)\): if there is a \(i \in \set{1, \dots{}, m}\) such that \(\phi_i(x) \ne x\), there there is another \(j \in \set{1, \dots{}, m}\) such that \(\phi_j \phi_i (x) = x\); that is, cycles \(\phi_i\) and \(\phi_j\) cannot be disjoint.
+\end{proof}
